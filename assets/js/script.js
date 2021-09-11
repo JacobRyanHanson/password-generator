@@ -29,7 +29,32 @@ function generatePassword() {
     }
   }
 
-  
+  for (var i = 0; i < passLength; i++) {
+    var index = randNum(0, indexes.length);
+
+    //randNum ranges based on HTML ASCII Character Set
+    if (indexes.length === 0) {
+      alert("Please choose at least one character type.");
+      break;
+    } else if (index === 0) {
+        password += String.fromCharCode(randNum(97, 122));
+    } else if (index === 1) {
+        password += String.fromCharCode(randNum(97, 122));
+    } else if (index === 2) {
+        password += String.fromCharCode(randNum(48, 57));
+    } else {
+        var specialChar = randNum(1, 33); 
+        if (specialChar <= 16) { //32-47
+          passowrd += String.fromCharCode(specialChar + 31); 
+        } else if (specialChar <= 23) { //58-64
+            password += String.fromCharCode(specialChar + 41);
+        } else if (specialChar <= 29) { //91-96
+            password += String.fromCharCode(specialChar + 67);
+        } else { //123-126
+            password += String.fromCharCode(specialChar + 93);
+        }
+    }
+  }
 }
 
 function validNum() {
