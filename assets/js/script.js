@@ -19,42 +19,43 @@ function generatePassword() {
   var hasSpecial = confirm("Include special characters: e.g. !, \", #");
 
   var charTypes = [hasLowerCase, hasUpperCase, hasNumbers, hasSpecial];
-  var indexes = [];
+  var charIndexes = [];
 
   var password = "";
 
   for (var i = 0; i < charTypes.length; i++) {
-    if (charTypes[j] === true) {
-      indexes[indexes.length] = i;
+    if (charTypes[i] === true) {
+      charIndexes[charIndexes.length] = i;
     }
   }
 
   for (var i = 0; i < passLength; i++) {
-    var index = randNum(0, indexes.length);
+    var index = randNum(0, charIndexes.length - 1);
 
     //randNum ranges based on HTML ASCII Character Set
-    if (indexes.length === 0) {
+    if (charIndexes.length === 0) {
       alert("Please choose at least one character type.");
       break;
-    } else if (index === 0) {
+    } else if (charIndexes[index] === 0) {
         password += String.fromCharCode(randNum(97, 122));
-    } else if (index === 1) {
-        password += String.fromCharCode(randNum(97, 122));
-    } else if (index === 2) {
+    } else if (charIndexes[index] === 1) {
+        password += String.fromCharCode(randNum(65, 90));
+    } else if (charIndexes[index] === 2) {
         password += String.fromCharCode(randNum(48, 57));
     } else {
-        var specialChar = randNum(1, 33); 
-        if (specialChar <= 16) { //32-47
-          passowrd += String.fromCharCode(specialChar + 31); 
-        } else if (specialChar <= 23) { //58-64
-            password += String.fromCharCode(specialChar + 41);
-        } else if (specialChar <= 29) { //91-96
-            password += String.fromCharCode(specialChar + 67);
+        var specialChar = randNum(1, 32); 
+        if (specialChar <= 15) { //32-47
+          password += String.fromCharCode(specialChar + 32); 
+        } else if (specialChar <= 22) { //58-64
+            password += String.fromCharCode(specialChar + 42);
+        } else if (specialChar <= 28) { //91-96
+            password += String.fromCharCode(specialChar + 68);
         } else { //123-126
-            password += String.fromCharCode(specialChar + 93);
+            password += String.fromCharCode(specialChar + 94);
         }
     }
   }
+  return password;
 }
 
 function validNum() {
